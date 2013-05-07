@@ -22,7 +22,7 @@ var tiles = new L.TileLayer(url, {maxZoom: 18, attribution: attrib, subdomains: 
 tiles.addTo(map);
 var marker;
 {% for boat in latest_map.all %}
-marker = L.marker([51.5, -0.09], { title: {{boat.name}} }).addTo(map);
+marker = L.marker([51.5, -0.09], { title: '{{boat.name}}' }).addTo(map);
 {% endfor %}
  //]]>
 </script>
