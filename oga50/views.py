@@ -1,34 +1,3 @@
-import os
-from flask import Flask
-
-app = Flask(__name__)
-
-@app.route('/')
-def hello():
-    return """<html>
-<head>
-<link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.5/leaflet.css" />
- <!--[if lte IE 8]>
-     <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.5/leaflet.ie.css" />
- <![endif]-->
-<script src="http://cdn.leafletjs.com/leaflet-0.5/leaflet.js"></script>
-<style type="text/css">
-#map { height: 640px; }
-</style>
-</head>
-<body>
-<div id="map"></div>
-</body>
-<script type="text/javascript">
- //<![CDATA[
-var map = L.map('map').setView([54.505, -0.09], 6);
-var url = 'http://{s}.mqcdn.com/tiles/1.0.0/osm/{z}/{x}/{y}.png';
-var subDomains = ['otile1','otile2','otile3','otile4'];
-var attrib = 'Data, imagery and map information provided by <a href="http://open.mapquest.co.uk" target="_blank">MapQuest</a>, <a href="http://www.openstreetmap.org/" target="_blank">OpenStreetMap</a> and contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/" target="_blank">CC-BY-SA</a>';
-var tiles = new L.TileLayer(url, {maxZoom: 18, attribution: attrib, subdomains: subDomains});
-tiles.addTo(map);
-var marker = L.marker([51.5, -0.09]).addTo(map);
- //]]>
-</script>
-</html>
-"""
+def home():
+	return render_to_response('home.html')
+	
