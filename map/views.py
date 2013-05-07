@@ -1,5 +1,7 @@
 # Create your views here.
-from django.http import render
+from django.shortcuts import render
+from map.models import Boat
+
 
 def index(request):
     latest_map = Boat.objects.all()
