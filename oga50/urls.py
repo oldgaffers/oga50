@@ -7,7 +7,7 @@ admin.autodiscover()
 urlpatterns = patterns('',
     # Examples:
     url(r'^$', 'oga50.views.home', name='home'),
-    url(r'^oga50/', include('oga50.foo.urls')),
+    #url(r'^oga50/', include('oga50.foo.urls')),
 
     # Uncomment the admin/doc line below to enable admin documentation:
     # url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
