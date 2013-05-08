@@ -14,7 +14,7 @@ def trackaphone():
     r = urllib2.urlopen("http://trackaphone.co.uk/callback/publish?id=1366120222963T569D3PYVN9B")
     xml = r.read()
     root = ET.fromstring(xml)
-    boats = {}
+    boats = []
     for n in root[1]:
         device = n.attrib
         loc = n[0].attrib
@@ -23,7 +23,7 @@ def trackaphone():
         b.name = name
         b.lat = loc['lat']
         b.lng = loc['lng']
-        boats[name] = b
+        boats.append(b)
     return boats
 
 def index(request):
