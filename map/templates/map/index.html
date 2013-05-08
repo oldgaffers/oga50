@@ -24,6 +24,9 @@ var marker;
 {% for boat in local_db.all %}
 marker = L.marker([{{boat.lat}}, {{boat.lng}}], { title: '{{boat.name}}' }).addTo(map);
 {% endfor %}
+{% for boat in trackaphone %}
+marker = L.marker([{{boat.lat}}, {{boat.lng}}], { title: '{{boat.name}}' }).addTo(map);
+{% endfor %}
  //]]>
 </script>
 </html>

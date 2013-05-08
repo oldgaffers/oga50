@@ -23,7 +23,7 @@ def trackaphone():
         b.name = name
         b.lat = loc['lat']
         b.lng = loc['lng']
-        boats['name'] = b
+        boats[name] = b
     return boats
 
 def index(request):
