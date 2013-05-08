@@ -4,6 +4,12 @@ from map.models import Boat
 import xml.etree.ElementTree as ET
 import urllib2
 
+class TBoat:
+    def __init__(self):
+        self.name=''
+        self.lat = 0.0
+        self.lng = 0.0
+
 def trackaphone():
     r = urllib2.urlopen("http://trackaphone.co.uk/callback/publish?id=1366120222963T569D3PYVN9B")
     xml = r.read()
@@ -13,10 +19,14 @@ def trackaphone():
         device = n.attrib
         loc = n[0].attrib
         name = device['name']
-        boats['name'] = {'name': name, lat: loc['lat'], lng: loc['lng']}
+		b = TBoat()
+		b.name = name
+		b.lat = loc['lat']
+		b.lng = loc['lng']
+        boats['name'] = b
     return boats
 
 def index(request):
-    latest_map = Boat.objects.all()
-    context = {'latest_map': latest_map}
+    local_db = Boat.objects.all()
+    context = {'local_db': local_db, 'trackaphone': trackaphone()}
     return render(request, 'map/index.html', context)
