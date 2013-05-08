@@ -21,7 +21,7 @@ var attrib = 'Data, imagery and map information provided by <a href="http://open
 var tiles = new L.TileLayer(url, {maxZoom: 18, attribution: attrib, subdomains: subDomains});
 tiles.addTo(map);
 var marker;
-{% for boat in latest_map.all %}
+{% for boat in local_db.all %}
 marker = L.marker([{{boat.lat}}, {{boat.lng}}], { title: '{{boat.name}}' }).addTo(map);
 {% endfor %}
  //]]>
