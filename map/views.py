@@ -16,7 +16,7 @@ class TBoat:
                 self.popup="<b>{0}</b><br/><img src='{1}'/>".format(b.name,b.image)
             except Boat.DoesNotExist:
                 self.name = name
-                self.popup='no record'
+                self.popup=''
         self.lat = 0.0
         self.lng = 0.0
 
