@@ -32,11 +32,13 @@ var detail;
 marker = L.marker([{{boat.lat}}, {{boat.lng}}], { title: '{{boat.name}}' }).addTo(map);
 detail = '{{boat.popup}}';
 if(detail != '')
-	marker.bindPopup(detail);
+    marker.bindPopup(detail);
 {% endfor %}
 {% for boat in trackaphone %}
+detail = '{{boat.popup}}';
 marker = L.marker([{{boat.lat}}, {{boat.lng}}], { title: '{{boat.name}}' }).addTo(map);
-marker.bindPopup(detail);
+if(detail != '')
+    marker.bindPopup(detail);
 {% endfor %}
  //]]>
 </script>
