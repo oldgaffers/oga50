@@ -15,7 +15,6 @@ class TBoat:
                 self.name = b.name
                 self.image=b.image
                 self.link=b.link
-                break
             except Boat.DoesNotExist:
                 self.name = name
                 self.image=''
