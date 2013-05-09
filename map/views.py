@@ -5,8 +5,21 @@ import xml.etree.ElementTree as ET
 import urllib2
 
 class TBoat:
-    def __init__(self):
-        self.name=''
+    def __init__(self, name=None):
+        if name is None:
+            self.name=''
+            self.popup=''
+        else:
+            try:
+                b = Boat2.objects.get('tpname'=name)
+                self.name = b.name
+                self.image=b.image
+                self.link=b.link
+                break
+            except Boat2.DoesNotExist:
+                self.name = name
+                self.image=''
+                self.link=''
         self.lat = 0.0
         self.lng = 0.0
 

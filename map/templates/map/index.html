@@ -1,5 +1,6 @@
 <html>
 <head>
+<title>OGA Round Britain Challenge</title>
 <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.5/leaflet.css" />
  <!--[if lte IE 8]>
      <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.5/leaflet.ie.css" />
@@ -10,7 +11,10 @@
 </style>
 </head>
 <body>
+<h1>OGA Round Britain Challenge</h1><div align="right"><a href="http://www.trackaphone.com" target="_blank"><img src="http://trackaphone.co.uk/callback/publish/rbc/images/trackaphone.png" width="108" height="87" border="0" /></a></div>
+The Round Britain Challenge aims to get as many OGA boats as possible sailing all round the British coast.
 <div id="map"></div>
+<div>Powered by <a href="http://www.trackaphone.com" target="_blank">TrackaPhone</a></div><div>additional data by marinetraffic.com</div>
 </body>
 <script type="text/javascript">
  //<![CDATA[
@@ -21,11 +25,17 @@ var attrib = 'Data, imagery and map information provided by <a href="http://open
 var tiles = new L.TileLayer(url, {maxZoom: 18, attribution: attrib, subdomains: subDomains});
 tiles.addTo(map);
 var marker;
+var detail;
 {% for boat in local_db.all %}
 marker = L.marker([{{boat.lat}}, {{boat.lng}}], { title: '{{boat.name}}' }).addTo(map);
+detail = '{{boat.popup}}';
+if(detail != '')
+	marker.bindPopup(detail);
 {% endfor %}
 {% for boat in trackaphone %}
 marker = L.marker([{{boat.lat}}, {{boat.lng}}], { title: '{{boat.name}}' }).addTo(map);
+if(detail != '')
+	marker.bindPopup(detail);
 {% endfor %}
  //]]>
 </script>
