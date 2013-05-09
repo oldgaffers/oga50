@@ -36,6 +36,6 @@ def trackaphone():
     return boats
 
 def index(request):
-    local_db = Boat.objects.filter(mmsi!='')
+    local_db = Boat.filter(mmsi!='')
     context = {'local_db': local_db, 'trackaphone': trackaphone()}
     return render(request, 'map/index.html', context)
