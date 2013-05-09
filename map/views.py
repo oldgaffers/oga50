@@ -29,8 +29,7 @@ def trackaphone():
         device = n.attrib
         loc = n[0].attrib
         name = device['name']
-        b = TBoat()
-        b.name = name
+        b = TBoat(name)
         b.lat = loc['lat']
         b.lng = loc['lng']
         boats.append(b)
