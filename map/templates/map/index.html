@@ -36,8 +36,7 @@ if(detail != '')
 {% endfor %}
 {% for boat in trackaphone %}
 marker = L.marker([{{boat.lat}}, {{boat.lng}}], { title: '{{boat.name}}' }).addTo(map);
-if(detail != '')
-	marker.bindPopup(detail);
+marker.bindPopup(detail);
 {% endfor %}
  //]]>
 </script>
