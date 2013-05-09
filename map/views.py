@@ -11,7 +11,7 @@ class TBoat:
             self.popup=''
         else:
             try:
-                b = Boat.objects.get('tpname'=name)
+                b = Boat.objects.get(tpname=name)
                 self.name = b.name
                 self.image=b.image
                 self.link=b.link
