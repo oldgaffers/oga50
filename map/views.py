@@ -13,7 +13,7 @@ class TBoat:
             try:
                 b = Boat.objects.get(tpname=name)
                 self.name = b.name
-                self.popup="<b>%s</b><br/><img src='%s'/>" % (b.name,b.image)
+                self.popup="<b>{0}</b><br/><img src='{1}'/>".format(b.name,b.image)
             except Boat.DoesNotExist:
                 self.name = name
                 self.popup='no record'
