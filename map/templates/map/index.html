@@ -35,10 +35,9 @@ if(detail != '')
     marker.bindPopup(detail);
 {% endfor %}
 {% for boat in trackaphone %}
-detail = '{{boat.popup}}';
 marker = L.marker([{{boat.lat}}, {{boat.lng}}], { title: '{{boat.name}}' }).addTo(map);
-if(detail != '')
-    marker.bindPopup(detail);
+if('{{boat.image}}'!= '')
+    marker.bindPopup("<b>{{boat.name}}</b><br/><img src='{{boat.image}}'/>")
 {% endfor %}
  //]]>
 </script>

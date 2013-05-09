@@ -8,15 +8,15 @@ class TBoat:
     def __init__(self, name=None):
         if name is None:
             self.name=''
-            self.popup=''
+            self.image=''
         else:
             try:
                 b = Boat.objects.get(tpname=name)
                 self.name = b.name
-                self.popup="<b>{0}</b><br/><img src='{1}'/>".format(b.name,b.image)
+                self.image = b.image
             except Boat.DoesNotExist:
                 self.name = name
-                self.popup=''
+                self.image=''
         self.lat = 0.0
         self.lng = 0.0
 
@@ -36,6 +36,6 @@ def trackaphone():
     return boats
 
 def index(request):
-    local_db = Boat.objects.all()
+    local_db = Boat.objects.filter(mmsi!='')
     context = {'local_db': local_db, 'trackaphone': trackaphone()}
     return render(request, 'map/index.html', context)
