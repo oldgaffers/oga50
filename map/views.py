@@ -13,12 +13,10 @@ class TBoat:
             try:
                 b = Boat.objects.get(tpname=name)
                 self.name = b.name
-                self.image=b.image
-                self.link=b.link
+                self.popup="<b>%s</b><br/><img src='%s'/>" % (b.name,b.image)
             except Boat.DoesNotExist:
                 self.name = name
-                self.image=''
-                self.link=''
+                self.popup=''
         self.lat = 0.0
         self.lng = 0.0
 
