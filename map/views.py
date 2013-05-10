@@ -35,7 +35,21 @@ def trackaphone():
         boats.append(b)
     return boats
 
+def ais(boat):
+    r = urllib2.urlopen("http://marinetraffic.com/ais/shipdetails.aspx?MMSI=" + boat.mmsi)
+    html = r.read()
+    p1 = html.find("&deg;")
+    p2 = html.rfind(">", 0, p1) + 1
+    p3 = html.find("&deg;", p1+1)
+    p4 = html.rfind(" ", p3) + 1
+    boat.lat = html[p2:p1]
+    boat.lng = html[p4:p3]
+    return boat
+
 def index(request):
     local_db = Boat.objects.exclude(mmsi='')
-    context = {'local_db': local_db, 'trackaphone': trackaphone()}
+    boats = []
+    for b in local_db:
+        boats.append(ais(b))
+    context = {'ais': boats, 'trackaphone': trackaphone()}
     return render(request, 'map/index.html', context)
