@@ -41,7 +41,7 @@ def ais(boat):
     p1 = html.find("&deg;")
     p2 = html.rfind(">", 0, p1) + 1
     p3 = html.find("&deg;", p1+1)
-    p4 = html.rfind("/", p3) + 1
+    p4 = html.rfind("/", p1, p3) + 1
     boat.lat = float(html[p2:p1])
     boat.lng = float(html[p4:p3])
     return boat
