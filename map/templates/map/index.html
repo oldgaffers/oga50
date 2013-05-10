@@ -28,7 +28,7 @@ var tiles = new L.TileLayer(url, {maxZoom: 18, attribution: attrib, subdomains: 
 tiles.addTo(map);
 var marker;
 var detail;
-{% for boat in ais.all %}
+{% for boat in ais %}
 marker = L.marker([{{boat.lat}}, {{boat.lng}}], { title: '{{boat.name}}' }).addTo(map);
   {% if boat.image %}
     marker.bindPopup("<b>{{boat.name}}</b><br/><img src='{{boat.image}}'/>")
