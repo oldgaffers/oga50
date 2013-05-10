@@ -20,6 +20,17 @@ The Round Britain Challenge aims to get as many OGA boats as possible sailing al
 </body>
 <script type="text/javascript">
  //<![CDATA[
+var tpIcon = L.icon({
+    iconUrl: '/static/map/tpmarker.png',
+    shadowUrl: '/static/map/shadow-tpmarker.png',
+
+    iconSize:     [101, 164], // size of the icon
+    shadowSize:   [184, 164], // size of the shadow
+    iconAnchor:   [52, 82], // point of the icon which will correspond to marker's location
+    shadowAnchor: [52, 82],  // the same for the shadow
+    popupAnchor:  [-3, -76] // point from which the popup should open relative to the iconAnchor
+});
+
 var map = L.map('map').setView([54.505, -0.09], 6);
 var url = 'http://{s}.mqcdn.com/tiles/1.0.0/osm/{z}/{x}/{y}.png';
 var subDomains = ['otile1','otile2','otile3','otile4'];
@@ -35,7 +46,7 @@ marker = L.marker([{{boat.lat}}, {{boat.lng}}], { title: '{{boat.name}}' }).addT
   {% endif %}
 {% endfor %}
 {% for boat in trackaphone %}
-marker = L.marker([{{boat.lat}}, {{boat.lng}}], { title: '{{boat.name}}' }).addTo(map);
+marker = L.marker([{{boat.lat}}, {{boat.lng}}], { icon: tpIcon, title: '{{boat.name}}' }).addTo(map);
   {% if boat.image %}
     marker.bindPopup("<b>{{boat.name}}</b><br/><img src='{{boat.image}}'/>")
   {% endif %}
