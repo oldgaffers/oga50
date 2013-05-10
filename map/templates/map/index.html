@@ -28,11 +28,11 @@ var tiles = new L.TileLayer(url, {maxZoom: 18, attribution: attrib, subdomains: 
 tiles.addTo(map);
 var marker;
 var detail;
-{% for boat in local_db.all %}
+{% for boat in ais.all %}
 marker = L.marker([{{boat.lat}}, {{boat.lng}}], { title: '{{boat.name}}' }).addTo(map);
-detail = '{{boat.popup}}';
-if(detail != '')
-    marker.bindPopup(detail);
+  {% if boat.image %}
+    marker.bindPopup("<b>{{boat.name}}</b><br/><img src='{{boat.image}}'/>")
+  {% endif %}
 {% endfor %}
 {% for boat in trackaphone %}
 marker = L.marker([{{boat.lat}}, {{boat.lng}}], { title: '{{boat.name}}' }).addTo(map);
