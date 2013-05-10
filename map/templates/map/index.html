@@ -20,9 +20,10 @@ The Round Britain Challenge aims to get as many OGA boats as possible sailing al
 </body>
 <script type="text/javascript">
  //<![CDATA[
+{% load staticfiles %}
 var tpIcon = L.icon({
-    iconUrl: '/static/map/tpmarker.png',
-    shadowUrl: '/static/map/shadow-tpmarker.png',
+    iconUrl: '{% static "map/tpmarker.png" %}',
+    shadowUrl: '{% static "map/shadow-tpmarker.png" %}',
 
     iconSize:     [101, 164], // size of the icon
     shadowSize:   [184, 164], // size of the shadow
