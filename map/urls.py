@@ -1,4 +1,5 @@
-from django.conf.urls import patterns, url, settings
+from django.conf.urls import patterns, url
+from django.conf import settings
 
 from map import views
 
