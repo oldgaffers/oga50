@@ -9,14 +9,19 @@ class TBoat:
         if name is None:
             self.name=''
             self.image=''
+            self.popup=''
         else:
             try:
                 b = Boat.objects.get(tpname=name)
                 self.name = b.name
                 self.image = b.image
+                self.popup='<b>'+b.name+'</b>'
+                if b.image != '':
+                    self.popup = self.popup + "</br><img src='/map/static/map/"+b.image+"'/>"
             except Boat.DoesNotExist:
                 self.name = name
                 self.image=''
+                self.popup=''
         self.lat = 0.0
         self.lng = 0.0
 

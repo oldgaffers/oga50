@@ -53,15 +53,14 @@ var marker;
 var detail;
 {% for boat in ais %}
 marker = L.marker([{{boat.lat}}, {{boat.lng}}], { icon: mtIcon, title: '{{boat.name}}' }).addTo(map);
-  {% if boat.image %}
-    marker.bindPopup("<b>{{boat.name}}</b><br/><img src='{{boat.image}}'/>")
+  {% if boat.popup %}
+    marker.bindPopup({{boat.popup|safe}})
   {% endif %}
 {% endfor %}
 {% for boat in trackaphone %}
 marker = L.marker([{{boat.lat}}, {{boat.lng}}], { icon: tpIcon, title: '{{boat.name}}' }).addTo(map);
-//marker = L.marker([{{boat.lat}}, {{boat.lng}}], { title: '{{boat.name}}' }).addTo(map);
-  {% if boat.image %}
-    marker.bindPopup("<b>{{boat.name}}</b><br/><img src='{{boat.image}}'/>")
+  {% if boat.popup %}
+    marker.bindPopup({{boat.popup|safe}})
   {% endif %}
 {% endfor %}
  //]]>
