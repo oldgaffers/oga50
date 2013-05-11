@@ -29,3 +29,20 @@ def mt():
     root = ET.fromstring(xml)
     return root 
 
+def mt_long():
+    r = urllib2.urlopen("http://services.marinetraffic.com/api/exportvessels/f0458439888b8e2eec63b8e8ae02b170d45790c4/timespan:60/msgtype:extended")
+    xml = r.read()
+    root = ET.fromstring(xml)
+    for n in root:
+        row = n.attrib
+        name = row['SHIPNAME']
+        mmsi = row['MMSI']
+        lon = row['LON']
+        lat = row['LAT']
+        try:
+            b = Boat.objects.get(mmsi=mmsi)
+            b.lon = lon
+            b.lat = lat
+        except Boat.DoesNotExist:
+            b = Boat.objects.create(name=name, mmsi=mmsi, lat=lat, lon=lon)
+        b.save()
