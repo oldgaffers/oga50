@@ -12,18 +12,18 @@
 </head>
 <body>
 <table>
-<tr><td><h1>OGA Round Britain Challenge</h1></td><td><img src="/static/map/mt-logo.png"/></td><td><a href="http://www.trackaphone.com" target="_blank"><img src="http://trackaphone.co.uk/callback/publish/rbc/images/trackaphone.png" width="108" height="87" border="0" /></a></td></tr>
+<tr><td><h1>OGA Round Britain Challenge</h1></td><td><img src="/map/static/map/mt-logo.png"/></td><td><a href="http://www.trackaphone.com" target="_blank"><img src="http://trackaphone.co.uk/callback/publish/rbc/images/trackaphone.png" width="108" height="87" border="0" /></a></td></tr>
 </table>
 The Round Britain Challenge aims to get as many OGA boats as possible sailing all round the British coast.
 <div id="map"></div>
-<div>Powered by <a href="http://www.trackaphone.com" target="_blank">TrackaPhone</a></div><div>additional data by marinetraffic.com <img src="/static/map/mt-logo.png"/></div>
+<div>Powered by <a href="http://www.trackaphone.com" target="_blank">TrackaPhone</a></div><div>additional data by marinetraffic.com <img src="/map/static/map/mt-logo.png"/></div>
 </body>
 <script type="text/javascript">
  //<![CDATA[
-{% load staticfiles %}
+{% load map/staticfiles %}
 var tpIcon = L.icon({
-    iconUrl: '/static/map/gaffer-blue.png',
-    shadowUrl: '/static/map/shadow-gaffer.png',
+    iconUrl: '/map/static/map/gaffer-blue.png',
+    shadowUrl: '/map/static/map/shadow-gaffer.png',
 
     iconSize:     [32, 37], // size of the icon
     shadowSize:   [51, 37], // size of the shadow
@@ -33,8 +33,8 @@ var tpIcon = L.icon({
 });
 
 var mtIcon = L.icon({
-    iconUrl: '/static/map/gaffer-orange.png',
-    shadowUrl: '/static/map/shadow-gaffer.png',
+    iconUrl: '/map/static/map/gaffer-orange.png',
+    shadowUrl: '/map/static/map/shadow-gaffer.png',
 
     iconSize:     [32, 37], // size of the icon
     shadowSize:   [51, 37], // size of the shadow
