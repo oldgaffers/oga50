@@ -20,7 +20,7 @@ The Round Britain Challenge aims to get as many OGA boats as possible sailing al
 </body>
 <script type="text/javascript">
  //<![CDATA[
-{% load map/staticfiles %}
+{% load staticfiles %}
 var tpIcon = L.icon({
     iconUrl: '/map/static/map/gaffer-blue.png',
     shadowUrl: '/map/static/map/shadow-gaffer.png',
@@ -58,8 +58,8 @@ marker = L.marker([{{boat.lat}}, {{boat.lng}}], { icon: mtIcon, title: '{{boat.n
   {% endif %}
 {% endfor %}
 {% for boat in trackaphone %}
-//marker = L.marker([{{boat.lat}}, {{boat.lng}}], { icon: tpIcon, title: '{{boat.name}}' }).addTo(map);
-marker = L.marker([{{boat.lat}}, {{boat.lng}}], { title: '{{boat.name}}' }).addTo(map);
+marker = L.marker([{{boat.lat}}, {{boat.lng}}], { icon: tpIcon, title: '{{boat.name}}' }).addTo(map);
+//marker = L.marker([{{boat.lat}}, {{boat.lng}}], { title: '{{boat.name}}' }).addTo(map);
   {% if boat.image %}
     marker.bindPopup("<b>{{boat.name}}</b><br/><img src='{{boat.image}}'/>")
   {% endif %}
