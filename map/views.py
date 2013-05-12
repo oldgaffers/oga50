@@ -17,7 +17,7 @@ class TBoat:
                 self.image = b.image
                 self.popup='<b>'+b.name+'</b>'
                 if b.image != '':
-                    self.popup = self.popup + "</br><img width='100' height='1000' src='/map/static/map/"+b.image+"'/>"
+                    self.popup = self.popup + "</br><img width='100' height='100' src='/map/static/map/"+b.image+"'/>"
                 if b.blog!= '':
                     self.popup = self.popup + "</br><a href='"+b.blog+"'>View log</a>"
             except Boat.DoesNotExist:
