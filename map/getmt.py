@@ -1,4 +1,5 @@
 from map.models import Boat
+from string import capwords
 import xml.etree.ElementTree as ET
 import urllib2
 
@@ -46,7 +47,7 @@ def trackaphone():
         device = n.attrib
         loc = n[0].attrib
         tpname = device['name']
-        data['SHIPNAME'] = tpname.split(' - ')[0].capitalize()
+        data['SHIPNAME'] = capwords(tpname.split(' - ')[0])
         data['TPNAME'] = tpname
         data['LAT']  = loc['lat']
         data['LON'] = loc['lng']
