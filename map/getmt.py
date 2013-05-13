@@ -17,6 +17,7 @@ def updateBoat(row, pin):
         except Boat.DoesNotExist:
             b = Boat.objects.create(name=name, mmsi=mmsi, lat=lat, lng=lng)
         b.pin = pin
+        b.tpname = row.get('TPNAME','')
         b.save()
         print b.name
 
@@ -29,12 +30,12 @@ def mt_update(xml):
 def mt():
     r = urllib2.urlopen("http://services.marinetraffic.com/api/exportvessels/f0458439888b8e2eec63b8e8ae02b170d45790c4/timespan:60")
     xml = r.read()
-    update(xml)
+    mt_update(xml)
 
 def mt_long():
     r = urllib2.urlopen("http://services.marinetraffic.com/api/exportvessels/f0458439888b8e2eec63b8e8ae02b170d45790c4/timespan:60/msgtype:extended")
     xml = r.read()
-    update(xml)
+    mt_update(xml)
 
 def trackaphone():
     r = urllib2.urlopen("http://trackaphone.co.uk/callback/publish?id=1366120222963T569D3PYVN9B")
@@ -44,7 +45,9 @@ def trackaphone():
 	data = {}
         device = n.attrib
         loc = n[0].attrib
-        data['SHIPNAME'] = device['name']
+        tpname = device['name']
+        data['SHIPNAME'] = tpname.split(' - ')[0]
+        data['TPNAME'] = tpname
         data['LAT']  = loc['lat']
         data['LON'] = loc['lng']
         updateBoat(data, 'tp')
