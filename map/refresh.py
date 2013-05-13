@@ -23,7 +23,6 @@ def updateBoat(row, pin):
             b.pin = pin
         b.tpname = row.get('TPNAME','')
         b.save()
-        print b.name
 
 def mt_update(xml):
     root = ET.fromstring(xml)
