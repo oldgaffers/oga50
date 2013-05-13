@@ -2,47 +2,49 @@ from map.models import Boat
 import xml.etree.ElementTree as ET
 import urllib2
 
-class TBoat:
-    def __init__(self, name=None):
-        if name is None:
-            self.name=''
-            self.image=''
-            self.popup=''
-        else:
-            try:
-                b = Boat.objects.get(tpname=name)
-                self.name = b.name
-                self.image = b.image
-                self.popup='<b>'+b.name+'</b>'
-                if b.image != '':
-                    self.popup = self.popup + "</br><img width='50' height='50' src='/map/static/map/"+b.image+"'/>"
-            except Boat.DoesNotExist:
-                self.name = name
-                self.image=''
-                self.popup=''
-        self.lat = 0.0
-        self.lng = 0.0
+def updateBoat(row, pin):
+        mmsi = row.get('MMSI','')
+        name = row.get('SHIPNAME','')
+        lng = row['LON']
+        lat = row['LAT']
+        try:
+            if name == '':
+                b = Boat.objects.get(mmsi=mmsi)
+            else:
+                b = Boat.objects.get(name=name)
+            b.lng = lng
+            b.lat = lat
+        except Boat.DoesNotExist:
+            b = Boat.objects.create(name=name, mmsi=mmsi, lat=lat, lng=lng)
+        b.pin = pin
+        b.save()
+        print b.name
 
-def mt():
-    r = urllib2.urlopen("http://services.marinetraffic.com/api/exportvessels/f0458439888b8e2eec63b8e8ae02b170d45790c4/timespan:5")
-    xml = r.read()
+def mt_update(xml):
     root = ET.fromstring(xml)
-    return root 
+    for n in root:
+        updateBoat(n.attrib, 'mt')
+
+# <POS><row TIMESTAMP="2013-05-12T19:25:00" STATUS="99" COURSE="0" SPEED="0" LON="-5.065115" LAT="50.154209" MMSI="235014887"/></POS>
+def mt():
+    r = urllib2.urlopen("http://services.marinetraffic.com/api/exportvessels/f0458439888b8e2eec63b8e8ae02b170d45790c4/timespan:60")
+    xml = r.read()
+    update(xml)
 
 def mt_long():
     r = urllib2.urlopen("http://services.marinetraffic.com/api/exportvessels/f0458439888b8e2eec63b8e8ae02b170d45790c4/timespan:60/msgtype:extended")
     xml = r.read()
+    update(xml)
+
+def trackaphone():
+    r = urllib2.urlopen("http://trackaphone.co.uk/callback/publish?id=1366120222963T569D3PYVN9B")
+    xml = r.read()
     root = ET.fromstring(xml)
-    for n in root:
-        row = n.attrib
-        name = row['SHIPNAME']
-        mmsi = row['MMSI']
-        lon = row['LON']
-        lat = row['LAT']
-        try:
-            b = Boat.objects.get(mmsi=mmsi)
-            b.lon = lon
-            b.lat = lat
-        except Boat.DoesNotExist:
-            b = Boat.objects.create(name=name, mmsi=mmsi, lat=lat, lon=lon)
-        b.save()
+    for n in root[1]:
+	data = []
+        device = n.attrib
+        loc = n[0].attrib
+        data['SHIPNAME'] = device['name']
+        data['LAT']  = loc['lat']
+        data['LON'] = loc['lng']
+        updateBoat(data, 'tp')

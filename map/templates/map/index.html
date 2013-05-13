@@ -21,6 +21,17 @@ The Round Britain Challenge aims to get as many OGA boats as possible sailing al
 <script type="text/javascript">
  //<![CDATA[
 {% load staticfiles %}
+var tkIcon = L.icon({
+    iconUrl: '/map/static/map/token.png',
+    shadowUrl: '/map/static/map/shadow-gaffer.png',
+
+    iconSize:     [32, 37], // size of the icon
+    shadowSize:   [51, 37], // size of the shadow
+    iconAnchor:   [0, 0], // point of the icon which will correspond to marker's location
+    shadowAnchor: [0, 0],  // the same for the shadow
+    popupAnchor:  [16, 18] // point from which the popup should open relative to the iconAnchor
+});
+
 var tpIcon = L.icon({
     iconUrl: '/map/static/map/gaffer-blue.png',
     shadowUrl: '/map/static/map/shadow-gaffer.png',
