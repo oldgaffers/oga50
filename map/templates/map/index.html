@@ -16,7 +16,11 @@
 </table>
 The Round Britain Challenge aims to get as many OGA boats as possible sailing all round the British coast.
 <div id="map"></div>
-<div>Powered by <a href="http://www.trackaphone.com" target="_blank">TrackaPhone</a></div><div>additional data by marinetraffic.com <img src="/map/static/map/mt-logo.png"/></div>
+<table>
+<tr><td><img src="/map/static/map/gaffer-blue.png"></td><td>Powered by <a href="http://www.trackaphone.com" target="_blank">TrackaPhone</a></td></tr>
+<tr><td><img src="/map/static/map/gaffer-orange.png"></td><td>Additional data by <a href="http://marinetraffic.com" target="_blank">MarinTraffic.com</a></td></tr>
+<tr><td><img src="/map/static/map/gaffer-green.png"></td><td>Manually data entry</td></tr>
+</table>
 </body>
 <script type="text/javascript">
  //<![CDATA[
@@ -54,7 +58,7 @@ var mtIcon = L.icon({
     popupAnchor:  [16, 18] // point from which the popup should open relative to the iconAnchor
 });
 
-var manalIcon = L.icon({
+var manualIcon = L.icon({
     iconUrl: '/map/static/map/gaffer-green.png',
     shadowUrl: '/map/static/map/shadow-gaffer.png',
 
