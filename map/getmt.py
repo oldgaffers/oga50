@@ -41,7 +41,7 @@ def trackaphone():
     xml = r.read()
     root = ET.fromstring(xml)
     for n in root[1]:
-	data = []
+	data = {}
         device = n.attrib
         loc = n[0].attrib
         data['SHIPNAME'] = device['name']
