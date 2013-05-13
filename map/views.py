@@ -20,11 +20,12 @@ def index(request):
     boats = []
     for b in local_db:
         b.popup=''
-        if b.image != '':
+        if b.image.startswith('http:'):
+            b.popup = "<b>"+b.name+"</b></br><img width='100' height='100' src='"+b.image+"'/>"
+        elif b.image != '':
             b.popup = "<b>"+b.name+"</b></br><img width='100' height='100' src='/map/static/map/"+b.image+"'/>"
         if b.blog!= '':
             b.popup = b.popup + "</br><a href='"+b.blog+"'>View log</a>"
         boats.append(b)
-    #context = {'ais': boats, 'trackaphone': trackaphone()}
     context = {'boats': boats}
     return render(request, 'map/index.html', context)
