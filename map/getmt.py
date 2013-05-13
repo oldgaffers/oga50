@@ -46,7 +46,7 @@ def trackaphone():
         device = n.attrib
         loc = n[0].attrib
         tpname = device['name']
-        data['SHIPNAME'] = tpname.split(' - ')[0]
+        data['SHIPNAME'] = tpname.split(' - ')[0].capitalize()
         data['TPNAME'] = tpname
         data['LAT']  = loc['lat']
         data['LON'] = loc['lng']
