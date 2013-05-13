@@ -56,5 +56,3 @@ def trackaphone():
         data['LON'] = loc['lng']
         updateBoat(data, 'tpIcon')
 
-trackaphone()
-mt()
