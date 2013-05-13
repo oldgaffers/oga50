@@ -1,4 +1,5 @@
-from django.core.management.base import BaseCommand, CommandError
+#!/app/.heroku/python/bin/python
+
 from map.models import Boat
 from string import capwords
 import xml.etree.ElementTree as ET
@@ -55,9 +56,5 @@ def trackaphone():
         data['LON'] = loc['lng']
         updateBoat(data, 'tpIcon')
 
-class Command(BaseCommand):
-    help = 'fetch data from trackaphone and AIS'
-
-    def handle(self, *args, **options):
-        trackaphone()
-        mt()
+trackaphone()
+mt()
