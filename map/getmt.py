@@ -5,7 +5,7 @@ import urllib2
 
 def updateBoat(row, pin):
         mmsi = row.get('MMSI','')
-        name = row.get('SHIPNAME','')
+        name = capwords(row.get('SHIPNAME',''))
         lng = row['LON']
         lat = row['LAT']
         try:
