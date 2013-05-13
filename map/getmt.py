@@ -24,7 +24,7 @@ def updateBoat(row, pin):
 def mt_update(xml):
     root = ET.fromstring(xml)
     for n in root:
-        updateBoat(n.attrib, 'mt')
+        updateBoat(n.attrib, 'mtIcon')
 
 # <POS><row TIMESTAMP="2013-05-12T19:25:00" STATUS="99" COURSE="0" SPEED="0" LON="-5.065115" LAT="50.154209" MMSI="235014887"/></POS>
 def mt():
@@ -50,4 +50,4 @@ def trackaphone():
         data['TPNAME'] = tpname
         data['LAT']  = loc['lat']
         data['LON'] = loc['lng']
-        updateBoat(data, 'tp')
+        updateBoat(data, 'tpIcon')

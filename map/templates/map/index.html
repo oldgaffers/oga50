@@ -12,7 +12,7 @@
 </head>
 <body>
 <table>
-<tr><td><h1>OGA Round Britain Challenge</h1></td><td><img src="/map/static/map/mt-logo.png"/></td><td><a href="http://www.trackaphone.com" target="_blank"><img src="http://trackaphone.co.uk/callback/publish/rbc/images/trackaphone.png" width="108" height="87" border="0" /></a></td></tr>
+<tr><td><h1>OGA Round Britain Challenge</h1></td><td><a href="http://marinetraffic.com" target="_blank"><img src="/map/static/map/mt-on-white-small.png"/></a><a href="http://www.trackaphone.com" target="_blank"><img src="http://trackaphone.co.uk/callback/publish/rbc/images/trackaphone.png" width="108" height="87" border="0" /></a></td></tr>
 </table>
 The Round Britain Challenge aims to get as many OGA boats as possible sailing all round the British coast.
 <div id="map"></div>
@@ -54,6 +54,17 @@ var mtIcon = L.icon({
     popupAnchor:  [16, 18] // point from which the popup should open relative to the iconAnchor
 });
 
+var manalIcon = L.icon({
+    iconUrl: '/map/static/map/gaffer-green.png',
+    shadowUrl: '/map/static/map/shadow-gaffer.png',
+
+    iconSize:     [32, 37], // size of the icon
+    shadowSize:   [51, 37], // size of the shadow
+    iconAnchor:   [0, 0], // point of the icon which will correspond to marker's location
+    shadowAnchor: [0, 0],  // the same for the shadow
+    popupAnchor:  [16, 18] // point from which the popup should open relative to the iconAnchor
+});
+
 var map = L.map('map').setView([53.0, 0.0], 6);
 var url = 'http://{s}.mqcdn.com/tiles/1.0.0/osm/{z}/{x}/{y}.png';
 var subDomains = ['otile1','otile2','otile3','otile4'];
@@ -61,15 +72,8 @@ var attrib = 'Data, imagery and map information provided by <a href="http://open
 var tiles = new L.TileLayer(url, {maxZoom: 18, attribution: attrib, subdomains: subDomains});
 tiles.addTo(map);
 var marker;
-var detail;
-{% for boat in ais %}
-marker = L.marker([{{boat.lat}}, {{boat.lng}}], { icon: mtIcon, title: '{{boat.name}}' }).addTo(map);
-  {% if boat.popup %}
-    marker.bindPopup("{{boat.popup|safe}}")
-  {% endif %}
-{% endfor %}
-{% for boat in trackaphone %}
-marker = L.marker([{{boat.lat}}, {{boat.lng}}], { icon: tpIcon, title: '{{boat.name}}' }).addTo(map);
+{% for boat in boats %}
+marker = L.marker([{{boat.lat}}, {{boat.lng}}], { icon: {{boat.pin}}, title: '{{boat.name}}' }).addTo(map);
   {% if boat.popup %}
     marker.bindPopup("{{boat.popup|safe}}")
   {% endif %}

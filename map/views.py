@@ -10,11 +10,13 @@ class TBoat:
             self.name=''
             self.image=''
             self.popup=''
+            self.pin=''
         else:
             try:
                 b = Boat.objects.get(tpname=name)
                 self.name = b.name
                 self.image = b.image
+                self.pin = b.pin
                 self.popup='<b>'+b.name+'</b>'
                 if b.image != '':
                     self.popup = self.popup + "</br><img width='100' height='100' src='/map/static/map/"+b.image+"'/>"
@@ -24,6 +26,7 @@ class TBoat:
                 self.name = name
                 self.image=''
                 self.popup=''
+                self.pin='manualIcon'
         self.lat = 0.0
         self.lng = 0.0
 
