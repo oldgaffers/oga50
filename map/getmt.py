@@ -17,7 +17,8 @@ def updateBoat(row, pin):
             b.lat = lat
         except Boat.DoesNotExist:
             b = Boat.objects.create(name=name, mmsi=mmsi, lat=lat, lng=lng)
-        b.pin = pin
+        if b.pin != 'tkIcon':
+            b.pin = pin
         b.tpname = row.get('TPNAME','')
         b.save()
         print b.name
