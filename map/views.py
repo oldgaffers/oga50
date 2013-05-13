@@ -21,7 +21,7 @@ def index(request):
     for b in local_db:
         b.popup=''
         if b.image != '':
-            b.popup = "<b>'+b.name+'</b></br><img width='100' height='100' src='/map/static/map/"+b.image+"'/>"
+            b.popup = "<b>"+b.name+"</b></br><img width='100' height='100' src='/map/static/map/"+b.image+"'/>"
         if b.blog!= '':
             b.popup = b.popup + "</br><a href='"+b.blog+"'>View log</a>"
         boats.append(b)
