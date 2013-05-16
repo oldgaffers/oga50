@@ -4,25 +4,36 @@ from map.models import Boat
 from string import capwords
 import xml.etree.ElementTree as ET
 import urllib2
+from dateutil import parser
 
 def updateBoat(row, pin):
         mmsi = row.get('MMSI','')
         name = capwords(row.get('SHIPNAME',''))
+        tpname = row.get('TPNAME','')
+        timestamp = row.get('TIMESTAMP',datetime.utcnow().isoformat())
         lng = row['LON']
         lat = row['LAT']
         try:
-            if name == '':
+            if mmsi != '':
                 b = Boat.objects.get(mmsi=mmsi)
+            elif tpname != '':
+                b = Boat.objects.get(tpname=tpname)
             else:
                 b = Boat.objects.get(name=name)
-            b.lng = lng
-            b.lat = lat
+            if b.last_fix != '':
+                last_fix = datetime.datetime(2013,4,1)
+            else:
+                last_fix = parser.parse(b.lastfix)
+            new_fix = parser.parse(timestamp)
+            if last_fix < new_fix:
+                b.lng = lng
+                b.lat = lat
+                if b.pin != 'tkIcon':
+                    b.pin = pin
+                b.save()
         except Boat.DoesNotExist:
-            b = Boat.objects.create(name=name, mmsi=mmsi, lat=lat, lng=lng)
-        if b.pin != 'tkIcon':
-            b.pin = pin
-        b.tpname = row.get('TPNAME','')
-        b.save()
+            b = Boat.objects.create(name=name, tpname=tpname, mmsi=mmsi, lat=lat, lng=lng, last_fix=timestamp, pin=pin)
+            b.save()
 
 def mt_update(xml):
     root = ET.fromstring(xml)
@@ -40,6 +51,7 @@ def mt_long():
     xml = r.read()
     mt_update(xml)
 
+#<?xml version="1.0" encoding="UTF-8"?><publisher><map-params enable-map-type="true" enable-overview="false" enable-pan="true" enable-scale="true"/><devices history-opacity="0.8" history-thickness="4"><device history-colour="#EC5252" icon-anchor-x="-1" icon-anchor-y="-1" icon-height="-1" icon-url="" icon-width="-1" label-content="Barrys Boat Lake District" name="Barrys Boat Lake District"><loc lat="54.235521" lng="-2.726719" time="Wed 15/05/13 17:05:47"/></device></devices></publisher>
 def trackaphone():
     r = urllib2.urlopen("http://trackaphone.co.uk/callback/publish?id=1366120222963T569D3PYVN9B")
     xml = r.read()
@@ -53,5 +65,6 @@ def trackaphone():
         data['TPNAME'] = tpname
         data['LAT']  = loc['lat']
         data['LON'] = loc['lng']
+        data['TIMESTAMP'] = parser.parse(loc['time']).isoformat()
         updateBoat(data, 'tpIcon')
 

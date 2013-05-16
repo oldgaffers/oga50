@@ -12,6 +12,7 @@ class Boat(models.Model):
     link = models.CharField(max_length=200, blank=True)
     pin = models.CharField(max_length=200, blank=True)
     text = models.CharField(max_length=400, blank=True)
+    last_fix = models.CharField(max_length=25, blank=True)
     lat = models.FloatField()
     lng = models.FloatField()
 
