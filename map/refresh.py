@@ -20,8 +20,11 @@ def updateBoat(row, pin):
                 b = Boat.objects.get(tpname=tpname)
             else:
                 b = Boat.objects.get(name=name)
-            if b.last_fix != '':
-                last_fix = datetime.strptime(b.last_fix, "%Y-%m-%dT%H:%M:%S")
+            if b.last_fix is not null:
+                if b.last_fix == '':
+                    last_fix = datetime(2013,4,1)
+                else:
+                    last_fix = datetime.strptime(b.last_fix, "%Y-%m-%dT%H:%M:%S")
             else:
                 last_fix = datetime(2013,4,1)
             new_fix = datetime.strptime(timestamp, "%Y-%m-%dT%H:%M:%S")
