@@ -65,6 +65,6 @@ def trackaphone():
         data['TPNAME'] = tpname
         data['LAT']  = loc['lat']
         data['LON'] = loc['lng']
-        data['TIMESTAMP'] = datetime.strptime(parse(loc['time'], "%a %d/%m/%y %H:%M:%S").isoformat()
+        data['TIMESTAMP'] = datetime.strptime(loc['time'], "%a %d/%m/%y %H:%M:%S").isoformat()
         updateBoat(data, 'tpIcon')
 
