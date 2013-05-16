@@ -4,7 +4,7 @@ from map.models import Boat
 from string import capwords
 import xml.etree.ElementTree as ET
 import urllib2
-from dateutil import parser
+from datetime import datetime
 
 def updateBoat(row, pin):
         mmsi = row.get('MMSI','')
@@ -23,8 +23,8 @@ def updateBoat(row, pin):
             if b.last_fix != '':
                 last_fix = datetime.datetime(2013,4,1)
             else:
-                last_fix = parser.parse(b.lastfix)
-            new_fix = parser.parse(timestamp)
+                last_fix = datetime.strptime(b.last_fix, "%Y-%m-%dT%H:%M:%S")
+            new_fix = datetime.strptime(timestamp, "%Y-%m-%dT%H:%M:%S")
             if last_fix < new_fix:
                 b.lng = lng
                 b.lat = lat
@@ -65,6 +65,6 @@ def trackaphone():
         data['TPNAME'] = tpname
         data['LAT']  = loc['lat']
         data['LON'] = loc['lng']
-        data['TIMESTAMP'] = parser.parse(loc['time']).isoformat()
+        data['TIMESTAMP'] = datetime.strptime(parse(loc['time'], "%a %d/%m/%y %H:%M:%S").isoformat()
         updateBoat(data, 'tpIcon')
 
