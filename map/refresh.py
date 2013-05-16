@@ -29,6 +29,7 @@ def updateBoat(row, pin):
                 last_fix = datetime(2013,4,1)
             new_fix = datetime.strptime(timestamp, "%Y-%m-%dT%H:%M:%S")
             if last_fix < new_fix:
+                b.last_fix = new_fix.isoformat()
                 b.lng = lng
                 b.lat = lat
                 if b.pin != 'tkIcon':
