@@ -76,7 +76,7 @@ def trackaphone(key):
 def tokens():
     boats = Boat.objects.all()
     for b in boats:
-        if b.link is not None:
+        if b.link != '':
             host = Boat.objects.get(name=b.link)
             b.lat=host.lat + 0.001
             b.lng=host.lng
