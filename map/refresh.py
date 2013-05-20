@@ -80,4 +80,5 @@ def tokens():
             host = Boat.objects.get(name=b.link)
             b.lat=host.lat + 0.001
             b.lng=host.lng
+            b.last_fix=host.last_fix
             b.save()
