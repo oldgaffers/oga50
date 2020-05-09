@@ -1,4 +1,1 @@
 django-heroku=0.3.1
-distribute==0.6.34
-dj-database-url==0.2.1
-gunicorn==19.5.0
